@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dhyorgenis</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Cadastro de Clientes"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+</head>
+
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: Roboto;
+}
+
+main{
+	width: 100%;
+	max-width:1290px;
+	margin:auto;
+	margin-top:15px;
+}
+.header{
+	background-color: #660606;
+	text-align: center;
+	padding: 1em;
+	color: #fff;
+}
+nav{
+	float: left;
+	width: 20%;
+	padding: 1em;
+	color: #360000;
+
+}
+nav ul{
+	list-style-type: none;
+	padding: 0;
+}
+nav ul a{
+	text-decoration: none;
+	background-color: #ccc;
+	display: block;
+	padding: 9px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	color: #360000;
+}
+nav ul a:hover {
+	background-color:#d5d5d5;
+}
+.central{
+	width: 80%;
+	float: right;
+	padding: 1em;
+	border-left: 1px solid #ccc;
+}
+.central p{
+	margin: 15px 0;
+	text-align: center;
+}
+
+main > footer{
+	clear: both;
+}
+form *{
+	margin: 5px 0;
+}
+form{
+	background-color: #ccc;
+	padding: 20px;
+}
+form input{
+	padding: 10px 15px;
+	border: none;
+	width: 100%
+}
+form button{
+	padding: 10px 15px;
+}
+.fa-fas {
+  color: #360000;
+}
+
+@media (max-width: 600px){
+	nav, .central{width:100%}
+}
+#msg{
+	text-align:center;
+	background-color:#bfff84;
+	padding: 1em;
+	display:none;
+}
+	</style>
+<body>
+
+
+		<main>
+			<header class="header">
+				<h1>Essse é o teste do meu site</h1>
+			</header>
+
+			<nav>
+				<ul>
+					<li>
+						<a href="quemsomos.html"><i class="fas fa-users"></i>  Quem Somos</a>
+					</li>
+					<li>
+						<a href="produtos.html"><i class="fas fa-shopping-bag"></i>  Produtos</a>
+					</li>
+					<li>
+						<a href="contato.html"><i class="fas fa-phone"></i>  Contato</a>
+					</li>
+					<li>
+						<a href="feedback.html"><i class="fas fa-star"></i>  Feedback</a>
+					</li>
+				</ul>
+			</nav>
+
+			<article class="central">
+				<header class="header">
+					<h2>Cadastro de Clientes</h2>
+				</header>
+				<p>
+					Por favor preencha com seus dados.
+				</p>
+
+				<form action="recebe.php" method="POST" id="form">
+					<input type="hidden" name="form" value="OK" >
+					Nome:<br>
+					<input type="text" name="name" id="name" ><br>
+					Email:<br>
+					<input type="Email" name="email" id="email"><br>
+					Telefone:<br>
+					<input type="number" name="tel" id="tel" ><br>
+					Endereço:<br>
+					<input type="text" name="adress" id="adress" ><br>
+					<center>
+						<button type="submit" value="Enviar">Enviar</button>
+					</center>				
+				</form>
+			</article>
+
+			<footer class="header">
+				@Dhyorgenis Costa Silva 2020
+			</footer>
+			<div id="msg"></div>
+		</main>
+
+		<script>
+
+			document.getElementById('form').addEventListener("submit", function(event) {
+				event.preventDefault();
+				
+				vname = document.getElementById('name').value;
+				vemail = document.getElementById('email').value;
+				vtel = document.getElementById('tel').value;
+				vadress = document.getElementById('adress').value;
+				
+				if(vname != "" && vemail != "" && vtel != "" && vadress != ""){
+					this.submit();
+				}else{
+					alert("Preencha corretamente todos os campos");
+				}
+			});
+
+				function pegarGet(url){
+				qs = url.slice(url.indexOf('?')+1);
+				qss = qs.split('&');
+				return qss;
+			}
+			
+			parametros = pegarGet(window.location.href);
+			
+			console.log(decodeURIComponent(parametros[1].split("=")[1]));
+			
+			controle = parametros[0].split("=")[1];
+			name = decodeURIComponent(parametros[1].split("=")[1]);
+			email = decodeURIComponent(parametros[2].split("=")[1]);
+			tel = decodeURIComponent(parametros[3].split("=")[1]);
+			adress = decodeURIComponent(parametros[4].split("=")[1]);
+
+			if(controle == 'OK'){
+				document.getElementById('msg').style.display = 'block';
+				document.getElementById('msg').innerHTML = "<i class='fas fa-check'></i> Parabens, " + name + " Voce enviou seus dados!";
+			}
+
+
+
+
+		
+
+		</script>
+</body>
+</html>
